@@ -1,0 +1,11 @@
+.logo-image-wrap {
+  width: 210px;
+  height: 70px;
+}
+
+@media (max-width: 600px) {
+  .logo-image-wrap {
+    width: 150px;
+    height: 55px;
+  }
+}
