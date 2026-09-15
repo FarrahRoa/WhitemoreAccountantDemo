@@ -333,6 +333,30 @@ h3,
   color: var(--brand-forest-dark);
 }
 
+.facts-grid > div {
+  display: flex;
+  min-width: 0;
+}
+
+.fact-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 280px;
+}
+
+.fact-card h3,
+.fact-card p {
+  position: relative;
+  z-index: 1;
+}
+
+.fact-card .learn {
+  margin-top: auto;
+  position: relative;
+  z-index: 1;
+}
+
 .forest-section,
 .forest-section h1,
 .forest-section h2,
