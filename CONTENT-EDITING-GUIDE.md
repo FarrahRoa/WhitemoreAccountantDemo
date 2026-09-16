@@ -11,6 +11,16 @@ Editable website content lives in `src/content/`. React components keep layout, 
 - `src/content/factSheetsContent.js` — fact-sheet categories and disclaimer.
 - `src/content/formsContent.js` — quote form steps, labels, options, and messages.
 - `src/content/footerContent.js` — footer copy and policy links.
+- `src/content/siteConfig.js` — the central `images` object contains every photo path, alt text, caption, and object position. Contact details and navigation remain in the same file.
+Replace photos by changing the six entries in `siteConfig.images` and storing the matching files in `public/assets/images/`. The current slots are `hero`, `about`, `services`, `development`, `appointment`, and `contact`. The hero loads eagerly; the other editorial images lazy-load below the fold.
+
+Current supplied-photo mapping: `home-team-meeting.jpg` is the Home hero; `team-collaboration.jpg` supports About and appointment content; `business-finance.jpg` supports Services; `business-growth.jpg` supports business planning; and `financial-dashboard.jpg` supports Contact. The appointment slot intentionally reuses the collaboration photo because five supplied photos were available. Add a sixth photo by replacing that configured path when one is supplied.
+
+Recommended photo dimensions are at least 1600 x 1000 pixels for editorial images, with WebP preferred. Keep the configured filenames and paths in sync; changing a filename without changing `siteConfig.images` will use the configured fallback image. Update each `alt` value whenever the subject or purpose changes. Use an empty `alt` only for a genuinely decorative image.
+
+The seven service categories are the `services` array in `src/content/servicesContent.js`; add or remove an object there to update the dropdown, cards, footer links, and service routes. Keep existing `slug` values stable.
+
+The Vite SPA fallback is configured in `vercel.json`; preserve the rewrite when deploying so direct refreshes of nested React Router paths continue to serve `index.html`.
 
 ## Common edits
 

@@ -1,0 +1,123 @@
+.editorial-image {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--brand-border);
+  background: var(--brand-mint-soft);
+  box-shadow: 0 18px 42px rgba(0, 59, 42, .12);
+}
+
+.editorial-image img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  transition: transform .7s cubic-bezier(.22, 1, .36, 1);
+}
+
+.editorial-image:hover img {
+  transform: scale(1.025);
+}
+
+.editorial-image figcaption {
+  padding: 11px 15px;
+  color: var(--brand-forest);
+  background: rgba(255, 255, 255, .96);
+  border-top: 2px solid var(--brand-lime);
+  font-size: 11px;
+  letter-spacing: .04em;
+}
+
+.section-feature {
+  max-width: 100%;
+  margin: 0 0 52px auto;
+}
+
+.about-editorial {
+  max-width: 100%;
+  margin-top: 52px;
+  margin-left: auto;
+}
+
+.page-landscape-image {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 0 42px;
+}
+
+.page-hero-image {
+  max-width: 1200px;
+  margin: 34px 0 0;
+}
+
+.page-landscape-image img {
+  aspect-ratio: 16 / 7;
+  height: 380px;
+}
+
+.page-hero-image figcaption {
+  color: var(--brand-forest);
+}
+
+.development-image {
+  min-height: 280px;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.development-image img {
+  height: 100%;
+  min-height: 280px;
+  aspect-ratio: auto;
+}
+
+.development-image figcaption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  color: #fff;
+  background: linear-gradient(transparent, rgba(0, 59, 42, .92));
+  border-top: 0;
+}
+
+.appointment-grid .editorial-image,
+.contact-info .editorial-image {
+  margin-bottom: 28px;
+}
+
+@media (max-width: 600px) {
+  .section-feature,
+  .about-editorial {
+    margin-top: 36px;
+    margin-bottom: 36px;
+  }
+
+  .development-image,
+  .development-image img {
+    min-height: 220px;
+  }
+
+  .page-hero-image {
+    margin-top: 28px;
+  }
+
+  .page-landscape-image img {
+    aspect-ratio: 4 / 3;
+    height: 260px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .page-landscape-image img {
+    aspect-ratio: 16 / 8;
+    height: 320px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .editorial-image img {
+    transition: none;
+  }
+}

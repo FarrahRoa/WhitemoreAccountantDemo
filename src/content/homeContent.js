@@ -1,3 +1,5 @@
+import { siteConfig } from './siteConfig';
+
 export const homeContent = {
   hero: {
     eyebrow: 'Whitemore Accountants Ltd',
@@ -5,9 +7,7 @@ export const homeContent = {
     highlightedLine: 1,
     description: 'Professional accounting, taxation, compliance, and business support designed around you and your organisation.',
     image: {
-      src: '/assets/images/hero-accounting-consultation.jpg',
-      alt: 'Accountant discussing financial records with a business client',
-      objectPosition: 'center center',
+      ...siteConfig.images.hero,
     },
     trustCard: { title: 'Accurate. Reliable. Trusted.', text: 'Professional support built around you.' },
     buttons: [
