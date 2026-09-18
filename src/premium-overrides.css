@@ -422,6 +422,16 @@ body {
   border-top: 3px solid var(--taupe);
 }
 
+.contact-grid {
+  align-items: start;
+}
+
+.contact-form {
+  align-self: start;
+  height: auto;
+  min-height: 0;
+}
+
 .progress-bar {
   height: 3px;
   margin: -20px 0 28px;
