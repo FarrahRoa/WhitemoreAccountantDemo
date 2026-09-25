@@ -18,15 +18,14 @@ export const siteConfig = {
     contact: { src: '/assets/images/financial-planning-desk.jpeg', fallback: '/assets/images/hero-accounting-consultation.jpg', alt: 'Accountant reviewing financial reports with a pen, charts, and a laptop.', caption: 'Here when you need a clear answer.', objectPosition: 'center center' },
   },
   contact: {
-    telephone: '+44 (0) 1642 919 040',
+    telephone: '+44 (0) 020 3504 2375',
     email: 'info@whitemoreaccountants.co.uk',
     address: ['165 Crescent Road', 'Middlesbrough, TS1 4QT', 'United Kingdom'],
     openingHours: 'Mon–Sat, 9:00 AM–6:00 PM',
     mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2313.048077032585!2d-1.2533082359759727!3d54.56790437266869!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487eed230e8a524d%3A0xd6f8a9c06cb0ec68!2s165%20Crescent%20Road%2C%20Middlesbrough%20TS1%204QT%2C%20UK!5e0!3m2!1sen!2sph',
     directionsUrl: 'https://www.google.com/maps/search/?api=1&query=165%20Crescent%20Road%2C%20Middlesbrough%2C%20TS1%204QT%2C%20United%20Kingdom',
   },
-  // TODO: Replace with the confirmed Calendly URL.
-  calendlyUrl: '',
+  calendlyUrl: 'https://calendly.com/whitemoreaccountants-info/new-meeting',
   // TODO: Replace with the confirmed online-payment URL.
   onlinePaymentUrl: '',
   socialLinks: [

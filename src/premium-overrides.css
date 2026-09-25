@@ -432,6 +432,38 @@ body {
   min-height: 0;
 }
 
+.calendly-embed {
+  min-width: 0;
+}
+
+.calendly-embed h2 {
+  margin-top: 0;
+}
+
+.calendly-embed iframe {
+  display: block;
+  width: 100%;
+  min-height: 760px;
+  border: 0;
+}
+
+.calendly-fallback {
+  margin: 18px 0 0;
+  font-size: 14px;
+}
+
+.calendly-fallback a {
+  color: var(--brand-forest);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 600px) {
+  .calendly-embed iframe {
+    min-height: 900px;
+  }
+}
+
 .progress-bar {
   height: 3px;
   margin: -20px 0 28px;
