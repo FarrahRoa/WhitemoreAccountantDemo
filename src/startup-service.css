@@ -1,0 +1,131 @@
+.startup-overview {
+  padding-top: 76px;
+}
+
+.startup-overview-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 460px);
+  gap: clamp(36px, 7vw, 88px);
+  align-items: center;
+}
+
+.startup-introduction {
+  max-width: 580px;
+}
+
+.startup-introduction h2 {
+  max-width: 500px;
+}
+
+.startup-introduction .body-lg {
+  margin: 0 0 25px;
+}
+
+.startup-image {
+  width: 100%;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--brand-border);
+  background: #fff;
+  box-shadow: 0 18px 42px var(--brand-shadow);
+}
+
+.startup-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+
+.startup-support {
+  padding-top: 84px;
+  padding-bottom: 92px;
+}
+
+.startup-support-heading {
+  max-width: 620px;
+  margin: 0 auto 36px;
+  text-align: center;
+}
+
+.startup-support-heading h2 {
+  margin-bottom: 0;
+}
+
+.startup-support-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.startup-support-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  min-height: 92px;
+  padding: 20px 22px;
+  border: 1px solid var(--brand-border);
+  background: #fff;
+  box-shadow: 0 8px 24px var(--brand-shadow);
+  color: var(--brand-ink);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.startup-support-list li svg {
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+  padding: 3px;
+  border-radius: 50%;
+  background: rgba(79, 159, 47, .12);
+  color: var(--brand-emerald);
+}
+
+@media (max-width: 900px) {
+  .startup-overview-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 38px;
+  }
+
+  .startup-introduction {
+    max-width: none;
+  }
+
+  .startup-image {
+    width: min(100%, 520px);
+    margin: 0 auto;
+  }
+
+  .startup-support-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .startup-overview,
+  .startup-support {
+    padding-top: 58px;
+    padding-bottom: 64px;
+  }
+
+  .startup-support-heading {
+    margin-bottom: 26px;
+    text-align: left;
+  }
+
+  .startup-support-list {
+    gap: 10px;
+  }
+
+  .startup-support-list li {
+    min-height: 0;
+    padding: 17px;
+  }
+}

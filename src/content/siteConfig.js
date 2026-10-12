@@ -17,7 +17,6 @@ export const siteConfig = {
     quote: { src: '/assets/images/uk-business-tax-advice.jpg', fallback: '/assets/images/accounting-services-banner.jpg', alt: 'Whitemore-branded graphic about UK tax and business advice for company directors.', caption: 'Let’s discuss the support your business needs.', isPromoArt: true, objectPosition: 'center center' },
     contact: { src: '/assets/images/business-support-teamwork.jpg', fallback: '/assets/images/business-ideas-meeting.jpg', alt: 'Whitemore-branded graphic about supporting businesses and helping them grow.', caption: 'Here when you need a clear answer.', isPromoArt: true, objectPosition: 'center center' },
     servicePages: {
-      'business-start-ups': [{ src: '/assets/images/accounting-practice-startup.jpg', fallback: '/assets/images/business-ideas-meeting.jpg', alt: 'Whitemore-branded graphic featuring an accountant and advice on establishing an accounting practice.', caption: 'Practical guidance for starting an accounting practice.', isPromoArt: true, objectPosition: 'center center' }],
       'accounts-compliance': [{ src: '/assets/images/bookkeeping-support.jpg', fallback: '/assets/images/compliance-growth.jpg', alt: 'Whitemore-branded graphic about bookkeeping, VAT, payroll, and accounting requirements.', caption: 'Keep bookkeeping and compliance in order.', isPromoArt: true, objectPosition: 'center center' }],
       taxation: [
         { src: '/assets/images/vat-registration.jpg', fallback: '/assets/images/tax-planning.jpg', alt: 'Whitemore-branded graphic about assistance with VAT registration.', caption: 'Support with VAT registration.', isPromoArt: true, objectPosition: 'center center' },
@@ -33,7 +32,7 @@ export const siteConfig = {
     },
   },
   contact: {
-    telephone: '+44 (0) 020 3504 2375',
+    telephone: '+44 (0) 079 8444 4899',
     email: 'info@whitemoreaccountants.co.uk',
     address: ['165 Crescent Road', 'Middlesbrough, TS1 4QT', 'United Kingdom'],
     openingHours: 'Mon–Sat, 9:00 AM–6:00 PM',

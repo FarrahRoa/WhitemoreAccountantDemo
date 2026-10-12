@@ -10,6 +10,29 @@ export const services = [
   { slug: 'uk-visa-accounting', title: 'UK Visa Accounting', icon: Globe2, iconName: 'Globe2', shortDescription: 'Customised accounting, forecasting and financial documentation support for eligible UK visa requirements.', fullDescription: 'Careful forecasting and documentation support can help eligible applicants prepare financial information.', benefits: ['Structured forecasts', 'Documentation support'], targetClients: 'Eligible UK business and visa applicants.', relatedFactSheets: ['Specialist Areas'] },
 ];
 
+export const businessStartUpsContent = {
+  title: 'Business Start-Ups',
+  tagline: 'Practical advice in plain English',
+  introduction: 'Starting a business brings important financial, legal, tax and administrative decisions. Whitemore Accountants provides clear, practical guidance throughout the process, helping you make informed choices and put reliable foundations in place as your business gets underway.',
+  supportHeading: 'We will help you to:',
+  supportServices: [
+    'Choose a suitable structure for your plans, whether you are starting as a sole trader, partnership, limited liability partnership or limited company.',
+    'Shape your business plan with realistic budgets, cash-flow projections and trading forecasts.',
+    'Understand how much funding you may need, explore appropriate finance and prepare supporting proposals.',
+    'Build a constructive working relationship with your bank.',
+    'Complete the relevant business registrations with Companies House and HMRC.',
+    'Manage company secretarial duties and related statutory records.',
+    'Put dependable record-keeping in place for day-to-day decisions and statutory reporting.',
+    'Select suitable computer equipment and introduce accounting software that fits your business.',
+    'Keep on top of bookkeeping, VAT, payroll and other ongoing accounting tasks.',
+    'Stay organised with continuing business compliance and administration.',
+  ],
+  image: {
+    src: '/assets/images/business-startup-support.jpg',
+    alt: 'Business start-up planning and accounting support from Whitemore Accountants',
+  },
+};
+
 export const serviceDetails = {
   included: ['A clear review of your requirements', 'Practical advice in plain English', 'Accurate, well-organised documentation', 'Responsive support when questions arise', 'A considered next step for your organisation'],
   targetClients: 'Individuals, founders, established companies and organisations looking for a dependable accounting partner.',

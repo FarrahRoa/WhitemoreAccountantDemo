@@ -7,6 +7,7 @@ import './footer-overrides.css';
 import './polish-overrides.css';
 import './premium-overrides.css';
 import './green-brand.css';
+import './startup-service.css';
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
