@@ -123,7 +123,27 @@ function ServiceDetail() {
 }
 
 function FactSheets() { const [query, setQuery] = useState(''); const [category, setCategory] = useState('All categories'); const categories = ['All categories', ...factCategories]; const filtered = factCategories.filter(x => (category === 'All categories' || x === category) && x.toLowerCase().includes(query.toLowerCase())); return <><PageHero eyebrow="Knowledge centre" title="Fact sheets, made practical." text="Our fact sheets provide concise and practical summaries of important financial, tax, employment, and business topics." /><section className="section"><div className="container"><div className="search-row"><div className="search-box"><Search /><input value={query} onChange={e => setQuery(e.target.value)} placeholder="Search fact sheets" aria-label="Search fact sheets" /></div><label className="filter-label" htmlFor="fact-category">Filter by</label><select id="fact-category" className="filter-button" value={category} onChange={e => setCategory(e.target.value)} aria-label="Filter fact sheets by category">{categories.map(item => <option key={item}>{item}</option>)}</select></div><p className="result-count" aria-live="polite">{filtered.length} {filtered.length === 1 ? 'fact sheet' : 'fact sheets'} found</p><div className="facts-grid"><AnimatePresence mode="popLayout" initial={false}>{filtered.map((x, i) => <motion.div key={x} layout initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, scale: .96 }} transition={{ duration: .3 }}><Link className="fact-card" to={`/fact-sheets/${x.toLowerCase().replaceAll(' ', '-')}`}><span className="fact-num">0{i + 1}</span><FileText /><h3>{x}</h3><p>{`Information and guidance covering ${x.toLowerCase()} matters.`}</p><span className="learn">Read fact sheet <ArrowRight size={15} /></span></Link></motion.div>)}</AnimatePresence></div>{filtered.length === 0 && <div className="empty-search"><Search /><h3>No fact sheets found</h3><p>Try a broader search or choose all categories.</p><button className="text-button" type="button" onClick={() => { setQuery(''); setCategory('All categories'); }}>Clear filters</button></div>}<p className="disclaimer">{factSheetContent.disclaimer}</p></div></section></>; }
-function FactDetail() { const { category } = useParams(); const title = factCategories.find(x => x.toLowerCase().replaceAll(' ', '-') === category) || 'General Business'; return <><PageHero eyebrow="Fact sheet" title={title} text="Concise, practical guidance to help you understand the essentials." /><section className="section"><div className="container article"><div className="article-meta"><span>Last reviewed: {factSheetContent.lastReviewed}</span><button onClick={() => window.print()}><FileText size={15} /> Print</button></div><h2>Understanding the key considerations</h2><p className="body-lg">This resource will provide a plain-English overview of the main considerations, common questions, and practical next steps related to {title.toLowerCase()}.</p><h3>How Whitemore can help</h3><p>Every situation is different. Our team can help you understand how the guidance applies to your circumstances and what information you may need to prepare.</p><Button to="/contact">Speak to our team</Button><p className="disclaimer">{factSheetContent.disclaimer}</p></div></section></>; }
+function FactDetail() {
+  const { category } = useParams();
+  const content = factSheetContent.sheets[category];
+  if (!content) return <SimplePage title="Fact sheet unavailable" eyebrow="Knowledge centre" />;
+  return <>
+    <PageHero eyebrow="Fact sheet" title={content.title} text="Concise, practical guidance to help you understand the essentials." />
+    <section className="section">
+      <div className="container article">
+        <div className="article-meta"><span>Last reviewed: {content.lastReviewed}</span></div>
+        <h2>Understanding the key considerations</h2>
+        <p className="body-lg">{content.introduction}</p>
+        {content.content.map(section => <React.Fragment key={section.heading}>
+          <h3>{section.heading}</h3>
+          <p>{section.text}</p>
+        </React.Fragment>)}
+        <Button to="/contact">Speak to our team</Button>
+        <p className="disclaimer">{content.advisoryNote}</p>
+      </div>
+    </section>
+  </>;
+}
 
 function Appointment() { return <><PageHero eyebrow="Appointments" title="A conversation is a good place to start." text="Arrange a 30-minute consultation with Whitemore Accountants Ltd to discuss your accounting, tax, compliance, or business-support requirements." /><section className="section"><div className="container appointment-grid"><div><p className="eyebrow">Consultation meeting</p><h2>Let’s talk through what you need.</h2><p className="body-lg">Choose a time that works for you. Web-conferencing details will be provided after confirmation.</p><div className="meeting-detail"><Clock3 /><span><b>Duration</b>30 minutes</span></div><div className="meeting-detail"><ShieldCheck /><span><b>Privacy first</b>See our privacy policy for details</span></div></div><div className="calendly-embed"><h2>Book your appointment</h2><iframe title="Calendly booking calendar" src={siteConfig.calendlyUrl} loading="lazy" /><p className="calendly-fallback">If the booking calendar does not load, <a href={siteConfig.calendlyUrl} target="_blank" rel="noopener noreferrer">book directly through Calendly.</a></p></div></div></section></>; }
 

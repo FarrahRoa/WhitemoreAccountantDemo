@@ -36,6 +36,8 @@ Keep each service’s page number, heading, introduction, checklist, and scope n
 
 Add a fact-sheet category in `src/content/factSheetsContent.js`. Its slug is generated from the category text by the existing component.
 
+Add each Fact Sheet detail introduction to `factSheetContent.sheets` using the matching route slug. Keep the title, category, review date, introduction, supporting content, and advisory note together in that entry; missing detail content displays a safe unavailable-page message.
+
 Update social URLs in `siteConfig.socialLinks`. Configure `calendlyUrl`, `googleMapsUrl`, and `onlinePaymentUrl` there when confirmed URLs are available.
 
 ## Unconfirmed information
