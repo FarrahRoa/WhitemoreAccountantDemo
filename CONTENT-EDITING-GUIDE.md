@@ -7,7 +7,7 @@ Editable website content lives in `src/content/`. React components keep layout, 
 - `src/content/siteConfig.js` — company name, logo paths, telephone, email, address, opening hours, social links, navigation, Calendly, maps, and payment URLs.
 - `src/content/homeContent.js` — Home hero, image, trust card, introduction, industries, reasons, development panel, fact preview, and CTA.
 - `src/content/aboutContent.js` — About page copy and values.
-- `src/content/servicesContent.js` — all seven services and shared service-detail data.
+- `src/content/servicesContent.js` — all seven service definitions and route-specific service-detail copy, images, and checklists.
 - `src/content/factSheetsContent.js` — fact-sheet categories and disclaimer.
 - `src/content/formsContent.js` — quote form steps, labels, options, and messages.
 - `src/content/footerContent.js` — footer copy and policy links.
@@ -31,6 +31,8 @@ Replace the Home hero image by changing `homeContent.hero.image.src`. Store the 
 Edit Home headings and paragraphs in `src/content/homeContent.js`.
 
 Add or edit a service in `src/content/servicesContent.js`. Keep its `slug` stable if existing links must continue to work. The same array drives the navigation dropdown, Home cards, services page, and service detail lookup.
+
+Keep each service’s page number, heading, introduction, checklist, and scope note in `serviceDetailContent`, keyed by its service slug. Service images continue to use their assigned entries in `siteConfig.images.servicePages`. The reusable detail layout reads all route-specific copy from this central configuration.
 
 Add a fact-sheet category in `src/content/factSheetsContent.js`. Its slug is generated from the category text by the existing component.
 

@@ -7,7 +7,7 @@ import {
   ShieldCheck, Sparkles, Users, X, Zap,
 } from 'lucide-react';
 import { siteConfig } from './content/siteConfig';
-import { businessStartUpsContent, services, serviceDetails } from './content/servicesContent';
+import { services, serviceDetailContent } from './content/servicesContent';
 import { homeContent } from './content/homeContent';
 import { aboutContent } from './content/aboutContent';
 import { factCategories, factSheetContent } from './content/factSheetsContent';
@@ -58,7 +58,7 @@ function Reveal({ children, className = '', delay = 0 }) { return <motion.div cl
 function ScrollProgress() { const [progress, setProgress] = useState(0); useEffect(() => { const update = () => { const scrollable = document.documentElement.scrollHeight - window.innerHeight; setProgress(scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0); }; update(); window.addEventListener('scroll', update, { passive: true }); window.addEventListener('resize', update); return () => { window.removeEventListener('scroll', update); window.removeEventListener('resize', update); }; }, []); return <div className="scroll-progress" style={{ transform: `scaleX(${progress / 100})` }} aria-hidden="true" />; }
 function RouteProgress() { const location = useLocation(); return <motion.div key={location.pathname} className="route-progress" initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: .55, ease: 'easeOut' }} aria-hidden="true" />; }
 function ScrollToTop() { const { pathname } = useLocation(); useEffect(() => { const behaviour = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'; window.scrollTo({ top: 0, left: 0, behavior: behaviour }); }, [pathname]); return null; }
-function PageHero({ eyebrow, title, text }) { const location = useLocation(); const pageImages = { '/fact-sheets': siteConfig.images.factSheets, '/appointment': siteConfig.images.appointment, '/get-a-quote': siteConfig.images.quote, '/contact': siteConfig.images.contact }; const image = pageImages[location.pathname]; return <section className="page-hero"><div className="container"><div className="breadcrumbs"><Link to="/">Home</Link><span>/</span><span>{title}</span></div><p className="eyebrow">{eyebrow}</p><h1>{title}</h1>{text && <p className="lead">{text}</p>}{image && <EditorialImage image={image} className="page-landscape-image page-hero-image" />}</div></section>; }
+function PageHero({ eyebrow, title, text, pageNumber }) { const location = useLocation(); const pageImages = { '/fact-sheets': siteConfig.images.factSheets, '/appointment': siteConfig.images.appointment, '/get-a-quote': siteConfig.images.quote, '/contact': siteConfig.images.contact }; const image = pageImages[location.pathname]; return <section className={`page-hero ${pageNumber ? 'service-page-hero' : ''}`} data-page-number={pageNumber}><div className="container"><div className="breadcrumbs"><Link to="/">Home</Link><span>/</span><span>{title}</span></div><p className="eyebrow">{eyebrow}</p><h1>{title}</h1>{text && <p className="lead">{text}</p>}{image && <EditorialImage image={image} className="page-landscape-image page-hero-image" />}</div></section>; }
 function Button({ to, children, secondary = false, variant }) {
   const resolvedVariant = variant || (secondary ? 'secondary' : 'primary');
   return <Link className={`button button-${resolvedVariant}`} to={to}>{children}<ArrowRight size={16} /></Link>;
@@ -86,15 +86,19 @@ function CTA() { const content = homeContent.cta; return <section className="cta
  function About() { const content = aboutContent; return <><PageHero {...content.page} /><section className="section"><div className="container about-content"><div><p className="eyebrow">{content.introduction.eyebrow}</p><h2>{content.introduction.title}</h2></div><div><p className="body-lg">{content.introduction.lead}</p><p>{content.introduction.text}</p></div></div><div className="container about-editorial"><EditorialImage image={siteConfig.images.about} className="page-landscape-image" /></div></section><section className="section soft"><div className="container values-grid"><div><p className="eyebrow">Our mission, vision & values</p><h2>Accurate.<br /><i>Reliable.</i><br />Trusted.</h2></div><div className="value-list">{content.values.map(([title, text], index) => { const Icon = [Sparkles, Globe2, ShieldCheck][index]; return <div key={title}><Icon /><h3>{title}</h3><p>{text}</p></div>; })}</div></div></section><Industries /><TeamPreview /><CTA /></>; }
 
 function Services() { return <><PageHero eyebrow="Our services" title="Expertise for every stage." text="From your first business idea to your next strategic decision, our services are designed to give you clarity and control." /><ServicesPreview featuredImage /><CTA /></>; }
-function BusinessStartUps() {
-  const content = businessStartUpsContent;
+function ServiceDetail() {
+  const { slug } = useParams();
+  const service = services.find(item => item.slug === slug);
+  if (!service) return <SimplePage title="Service not found" eyebrow="Our services" />;
+  const content = serviceDetailContent[service.slug];
+  if (!content) return <SimplePage title="Service details unavailable" eyebrow="Our services" />;
   return <>
-    <PageHero eyebrow="Our services" title={content.title} text={content.tagline} />
+    <PageHero eyebrow={content.label} title={content.title} text={content.subtitle} pageNumber={content.pageNumber} />
     <section className="section startup-overview">
       <div className="container startup-overview-grid">
         <div className="startup-introduction">
-          <p className="eyebrow">Business start-up support</p>
-          <h2>Build strong foundations from day one.</h2>
+          <p className="eyebrow">{content.editorialLabel}</p>
+          <h2>{content.editorialHeading}</h2>
           <p className="body-lg">{content.introduction}</p>
           <Button to="/appointment">Discuss your plans</Button>
         </div>
@@ -106,18 +110,17 @@ function BusinessStartUps() {
     <section className="section soft startup-support">
       <div className="container">
         <div className="startup-support-heading">
-          <p className="eyebrow">Practical accounting support</p>
-          <h2>{content.supportHeading}</h2>
+          <p className="eyebrow">{content.checklistLabel}</p>
+          <h2>{content.checklistHeading}</h2>
         </div>
         <ul className="startup-support-list">
-          {content.supportServices.map(item => <li key={item}><Check aria-hidden="true" /><span>{item}</span></li>)}
+          {content.checklistItems.map(item => <li key={item}><Check aria-hidden="true" /><span>{item}</span></li>)}
         </ul>
+        {content.scopeNote && <p className="service-scope-note">{content.scopeNote}</p>}
       </div>
     </section>
   </>;
 }
-
-function ServiceDetail() { const { slug } = useParams(); const service = services.find(item => item.slug === slug) || services[0]; if (service.slug === 'business-start-ups') return <BusinessStartUps />; const serviceImages = siteConfig.images.servicePages[slug] || []; const Icon = service.icon; return <><PageHero eyebrow="Our services" title={service.title} text={service.shortDescription} /><section className="section"><div className="container detail-grid"><div><span className="large-service-icon"><Icon /></span><p className="eyebrow">How we can help</p><h2>Support that makes the detail feel manageable.</h2><p className="body-lg">{service.shortDescription} We take time to understand your circumstances, explain your options, and provide dependable support that fits the way you work.</p><Button to="/appointment">Book a Consultation</Button></div><div className="included"><h3>What is included</h3>{serviceDetails.included.map(item => <div key={item}><Check /> {item}</div>)}<h3 className="mt">Who this is for</h3><p>{serviceDetails.targetClients}</p><Button to="/get-a-quote" secondary>Request a Quote</Button></div></div>{serviceImages.length > 0 && <div className="container service-detail-visuals">{serviceImages.map(image => <EditorialImage image={image} className="service-detail-image" key={image.src} />)}</div>}</section><section className="section soft"><div className="container faq"><p className="eyebrow">Frequently asked questions</p><h2>Helpful answers, upfront.</h2>{serviceDetails.faqs.map(question => <details key={question}><summary>{question}<ChevronDown /></summary><p>We will discuss your needs in an initial consultation and confirm the most suitable next steps for your circumstances.</p></details>)}</div></section></>; }
 
 function FactSheets() { const [query, setQuery] = useState(''); const [category, setCategory] = useState('All categories'); const categories = ['All categories', ...factCategories]; const filtered = factCategories.filter(x => (category === 'All categories' || x === category) && x.toLowerCase().includes(query.toLowerCase())); return <><PageHero eyebrow="Knowledge centre" title="Fact sheets, made practical." text="Our fact sheets provide concise and practical summaries of important financial, tax, employment, and business topics." /><section className="section"><div className="container"><div className="search-row"><div className="search-box"><Search /><input value={query} onChange={e => setQuery(e.target.value)} placeholder="Search fact sheets" aria-label="Search fact sheets" /></div><label className="filter-label" htmlFor="fact-category">Filter by</label><select id="fact-category" className="filter-button" value={category} onChange={e => setCategory(e.target.value)} aria-label="Filter fact sheets by category">{categories.map(item => <option key={item}>{item}</option>)}</select></div><p className="result-count" aria-live="polite">{filtered.length} {filtered.length === 1 ? 'fact sheet' : 'fact sheets'} found</p><div className="facts-grid"><AnimatePresence mode="popLayout" initial={false}>{filtered.map((x, i) => <motion.div key={x} layout initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, scale: .96 }} transition={{ duration: .3 }}><Link className="fact-card" to={`/fact-sheets/${x.toLowerCase().replaceAll(' ', '-')}`}><span className="fact-num">0{i + 1}</span><FileText /><h3>{x}</h3><p>{`Information and guidance covering ${x.toLowerCase()} matters.`}</p><span className="learn">Read fact sheet <ArrowRight size={15} /></span></Link></motion.div>)}</AnimatePresence></div>{filtered.length === 0 && <div className="empty-search"><Search /><h3>No fact sheets found</h3><p>Try a broader search or choose all categories.</p><button className="text-button" type="button" onClick={() => { setQuery(''); setCategory('All categories'); }}>Clear filters</button></div>}<p className="disclaimer">{factSheetContent.disclaimer}</p></div></section></>; }
 function FactDetail() { const { category } = useParams(); const title = factCategories.find(x => x.toLowerCase().replaceAll(' ', '-') === category) || 'General Business'; return <><PageHero eyebrow="Fact sheet" title={title} text="Concise, practical guidance to help you understand the essentials." /><section className="section"><div className="container article"><div className="article-meta"><span>Last reviewed: {factSheetContent.lastReviewed}</span><button onClick={() => window.print()}><FileText size={15} /> Print</button></div><h2>Understanding the key considerations</h2><p className="body-lg">This resource will provide a plain-English overview of the main considerations, common questions, and practical next steps related to {title.toLowerCase()}.</p><h3>How Whitemore can help</h3><p>Every situation is different. Our team can help you understand how the guidance applies to your circumstances and what information you may need to prepare.</p><Button to="/contact">Speak to our team</Button><p className="disclaimer">{factSheetContent.disclaimer}</p></div></section></>; }
